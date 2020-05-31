@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #ddeefc;
+    font-family: "Source Sans Pro", sans-serif;
+}
+.card-from {
+    max-width: 570px;
+    margin: auto;
+    width: 100%;
+}
+.card-form__inner {
+    background: #fff;
+    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+    border-radius: 10px;
+    padding: 35px;
+    padding-top: 180px;
+}
+.cart-label_number, .cart-label_holders, .cart-label_month, .card-label__cvv {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #1a3b5d;
+    width: 100%;
+    display: block;
+    user-select: none;
+}
+.cardNumber, .cardHolders, .cardMonth, .cardYear, .card-cod__cvv {
+    width: 94%;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: none;
+    border: 1px solid #ced6e0;
+    transition: all 0.3s ease-in-out;
+    font-size: 18px;
+    padding: 5px 15px;
+    background: none;
+    color: #1a3b5d;
+    font-family: "Source Sans Pro", sans-serif;
+}
+.cardNumber:hover, 
+.cardNumber:focus,
+.cardHolders:hover, 
+.cardHolders:focus {
+    border-color: #3d9cff;
+}
+.cart-input_number, .cart-input_holders {
+    margin-bottom: 20px;
+}
+.card-form__group {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.cardMonth, .cardYear {
+    width: 30%;
+    -webkit-appearance: none;
+    background-image: url('./img/загруженное.png');
+    background-size: 12px;
+    background-position: 90% center;
+    background-repeat: no-repeat;
+    padding-right: 30px;
+    margin-right: 15px;
+}
+.card-input_cvv {
+    width: 21%;
+    padding-right: 30px;
+}
+.card-form__button {
+    width: 100%;
+    height: 55px;
+    background: #2364d2;
+    border: none;
+    border-radius: 5px;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: "Source Sans Pro", sans-serif;
+    box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
+    color: #fff;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.card-cod__cvv {
+    transform: translateY(-23px);
+    height: 40px;
+}
+.card-label__cvv {
+    transform: translateY(-23px);
+}
+.cardYear {
+    margin-right: 50px;
+}

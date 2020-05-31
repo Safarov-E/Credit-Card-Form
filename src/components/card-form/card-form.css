@@ -170,8 +170,15 @@ body {
 }
 .card-item__dateItem span {
     font-size: 22px;
+    width: 22px;
     display: inline-block;
 }
 .card-item__dateTitle {
     display: block;
+}
+.cardMonth_group {
+    width: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
 }

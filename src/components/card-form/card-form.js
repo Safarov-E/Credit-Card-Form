@@ -7,6 +7,8 @@ export default class extends React.Component {
     state = {
         cardMonth: [],
         cardYear: [],
+        cardMonthValue: null,
+        cardYearValue: null
     }
     componentDidMount() {
         let arr = [], count = 0;
@@ -23,8 +25,17 @@ export default class extends React.Component {
         }
         this.setState({cardMonth: arr1})
     }
+    handlerSelectMonth = (event) => {
+        let valueMonth = event.target.value;
+        this.setState({ cardMonthValue: valueMonth })
+    }
+    handlerSelectYear = (event) => {
+        let valueMonth = event.target.value;
+        let year = valueMonth.split('').splice(-2, 2).join('');
+        this.setState({ cardYearValue: year })
+    }
     render() {
-        const { cardMonth, cardYear } = this.state;
+        const { cardMonth, cardYear, cardMonthValue, cardYearValue } = this.state;
         console.log()
         return (
             <div className="card-from">
@@ -67,13 +78,15 @@ export default class extends React.Component {
                             </label>
                             <div className="card-item__date">
                                 <label htmlFor="cardMonth" className="card-item__dateTitle">Expires</label>
-                                <label htmlFor="cardMonth" className="card-item__dateItem">
-                                    <span>MM</span>
-                                </label>
-                                /
-                                <label htmlFor="cardYear" className="card-item__dateItem">
-                                    <span>YY</span>
-                                </label>
+                                <div className="cardMonth_group">
+                                    <label htmlFor="cardMonth" className="card-item__dateItem">
+                                        <span>{cardMonthValue === null ? 'MM' : cardMonthValue}</span>
+                                    </label>
+                                    /
+                                    <label htmlFor="cardYear" className="card-item__dateItem">
+                                        <span>{cardYearValue === null ? 'YY' : cardYearValue}</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -90,7 +103,7 @@ export default class extends React.Component {
                     <div className="card-form__row">
                         <div className="card-form__group">
                             <label htmlFor="cardMonth" className="cart-label_month">Expiration Date</label>
-                            <select id="cardMonth" className="cardMonth">
+                            <select id="cardMonth" className="cardMonth" onChange={this.handlerSelectMonth}>
                                 <option disabled="disabled" selected>Month</option>
                                 {
                                     cardMonth.map((item) => {
@@ -101,7 +114,7 @@ export default class extends React.Component {
                                     }) 
                                 }
                             </select>
-                            <select id="cardYear" className="cardYear">
+                            <select id="cardYear" className="cardYear" onChange={this.handlerSelectYear}>
                                 <option disabled="disabled" selected>Year</option>
                                 {
                                     cardYear.map((item) => {

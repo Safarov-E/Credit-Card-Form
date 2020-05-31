@@ -1,39 +1,91 @@
 import React from 'react';
+import chip from './img/chip.png';
+import visa from './img/visa.png';
 import './card-form.css';
 
 export default class extends React.Component {
     state = {
-        cardMonth: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        cardYear: [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031],
+        cardMonth: [],
+        cardYear: [],
     }
-    cardYear() {
+    componentDidMount() {
         let arr = [], count = 0;
         for(let i = 2020; i <= 2031; i++) {
             arr[count] = i;
             count++;
         }
         this.setState({cardYear: arr})
-    }
-    cardMonth() {
-        let arr = [], count = 0;
+
+        let arr1 = [], count1 = 0;
         for(let i = 1; i <= 12; i++) {
-            arr[count] = i;
-            count++;
+            arr1[count1] = i;
+            count1++;
         }
-        this.setState({cardMonth: arr})
+        this.setState({cardMonth: arr1})
     }
     render() {
         const { cardMonth, cardYear } = this.state;
+        console.log()
         return (
             <div className="card-from">
+                <div className="card-item">
+                    <div className="card-item__side">
+                        <div className="card-item__logo">
+                            <img src={chip} style={{width: '60px', height: '48px'}}/>
+                            <img src={visa} style={{width: '85px', height: '45px'}}/>
+                        </div>
+                        <label htmlFor="cardNumber" className="card-item__numbers">
+                            <div className="card-item__number">
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                            </div>
+                            <div className="card-item__number">
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                            </div>
+                            <div className="card-item__number">
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                            </div>
+                            <div className="card-item__number">
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                                <div className="card-item__numberItem">#</div>
+                            </div>
+                        </label>
+                        <div className="card-item__content">
+                            <label htmlFor="cardName" className="card-item__info">
+                                <div className="card-item__holder">Card Holder</div>
+                                <div className="card-item__name">Full Name</div>
+                            </label>
+                            <div className="card-item__date">
+                                <label htmlFor="cardMonth" className="card-item__dateTitle">Expires</label>
+                                <label htmlFor="cardMonth" className="card-item__dateItem">
+                                    <span>MM</span>
+                                </label>
+                                /
+                                <label htmlFor="cardYear" className="card-item__dateItem">
+                                    <span>YY</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <form className="card-form__inner">
                     <div className="cart-input_number">
                         <label htmlFor="cardNumber" className="cart-label_number">Card Number</label>
                         <input type="text" id="cardNumber" className="cardNumber" />
                     </div>
                     <div className="cart-input_holders">
-                        <label htmlFor="cardHolders" className="cart-label_holders">Card Holders</label>
-                        <input type="text" id="cardHolders" className="cardHolders" />
+                        <label htmlFor="cardName" className="cart-label_holders">Card Holders</label>
+                        <input type="text" id="cardName" className="cardHolders" />
                     </div>
                     <div className="card-form__row">
                         <div className="card-form__group">
@@ -67,7 +119,7 @@ export default class extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <button class="card-form__button">
+                    <button className="card-form__button">
                         Submit
                     </button>
                 </form>

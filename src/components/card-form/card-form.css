@@ -134,14 +134,18 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 35px;
+    padding: 0 10px 0 10px;
 }
 .card-item__number {
     display: flex;
+    overflow: hidden;
+    width: 100%;
 }
 .card-item__numberItem {
     font-size: 25px;
     width: 16px;
     color: #fff;
+    margin: auto;
 }
 .card-item__content {
     color: #fff;
@@ -182,4 +186,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center
+}
+.card-item__numberItem:nth-child(4),
+.card-item__numberItem:nth-child(8),
+.card-item__numberItem:nth-child(12) {
+    margin-right: 20px;
 }

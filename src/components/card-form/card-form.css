@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body {
     background: #ddeefc;
@@ -109,7 +110,7 @@ body {
 
 .card-item {
     max-width: 430px;
-    height: 270px;
+    max-height: 270px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -121,7 +122,7 @@ body {
 .card-item__side {
     border: 1px solid black;
     background: url('./img/Nature_Flowers_Wet_blue_rose_035114_.jpg') no-repeat;
-    background-size: 100%;
+    background-size: cover;
     padding: 25px 15px;
     border-radius: 15px;
 }
@@ -140,6 +141,7 @@ body {
     display: flex;
     overflow: hidden;
     width: 100%;
+    padding: 5px;
 }
 .card-item__numberItem {
     font-size: 25px;
@@ -191,4 +193,16 @@ body {
 .card-item__numberItem:nth-child(8),
 .card-item__numberItem:nth-child(12) {
     margin-right: 20px;
+}
+.active {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 1);
+    border-radius: 6px; 
+    box-sizing: border-box;
+}
+.card-item__info {
+    width: 100%;
+    padding: 5px;
+}
+.card-item__date {
+    padding: 5px;
 }

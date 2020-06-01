@@ -8,7 +8,8 @@ export default class extends React.Component {
         cardMonth: [],
         cardYear: [],
         cardMonthValue: null,
-        cardYearValue: null
+        cardYearValue: null,
+        cardName: ''
     }
     componentDidMount() {
         let arr = [], count = 0;
@@ -34,8 +35,12 @@ export default class extends React.Component {
         let year = valueMonth.split('').splice(-2, 2).join('');
         this.setState({ cardYearValue: year })
     }
+    handlerInputName = (event) => {
+        let valueName = event.target.value;
+        this.setState({ cardName: valueName })
+    }
     render() {
-        const { cardMonth, cardYear, cardMonthValue, cardYearValue } = this.state;
+        const { cardMonth, cardYear, cardMonthValue, cardYearValue, cardName } = this.state;
         console.log()
         return (
             <div className="card-from">
@@ -74,7 +79,7 @@ export default class extends React.Component {
                         <div className="card-item__content">
                             <label htmlFor="cardName" className="card-item__info">
                                 <div className="card-item__holder">Card Holder</div>
-                                <div className="card-item__name">Full Name</div>
+                                <div className="card-item__name">{cardName.trim() === '' ? 'Full Name' : cardName}</div>
                             </label>
                             <div className="card-item__date">
                                 <label htmlFor="cardMonth" className="card-item__dateTitle">Expires</label>
@@ -98,7 +103,11 @@ export default class extends React.Component {
                     </div>
                     <div className="cart-input_holders">
                         <label htmlFor="cardName" className="cart-label_holders">Card Holders</label>
-                        <input type="text" id="cardName" className="cardHolders" />
+                        <input type="text" id="cardName" 
+                                className="cardHolders" 
+                                onChange={this.handlerInputName}
+                                value={cardName}
+                        />
                     </div>
                     <div className="card-form__row">
                         <div className="card-form__group">

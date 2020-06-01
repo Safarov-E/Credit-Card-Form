@@ -161,6 +161,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
+    max-width: 283px;
 }
 .card-item__dateItem {
     opacity: 0.7;

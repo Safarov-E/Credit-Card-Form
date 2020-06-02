@@ -17,7 +17,7 @@ export default class extends React.PureComponent  {
             visible: true,
             cardCvv: '',
             showStore: false,
-            showStore1: false
+            showStore1: true
         }
         this.myRef = React.createRef();
         this.myRef_1 = React.createRef();
@@ -92,23 +92,41 @@ export default class extends React.PureComponent  {
             this.setState({cardCvv: ''})
         }
     }
-    componentWillUpdate(nextProps, nextState){
-        if(this.state.showStore1 !== nextState.showStore1) {
+    handlerCvv = () => {
+        if(this.state.showStore1) {
             let rotateY = 0;
+                let inter = setInterval(() => {
+                    this.myRef_5.current.style.transform = 'perspective(1000px) rotateY('+ rotateY +'deg) rotateX(0deg) rotateZ(0deg)';
+                    rotateY++;
+                    if(rotateY === 90) {
+                        this.setState({showStore: true})
+                    }
+                    else if(rotateY === 181) {
+                        clearInterval(inter);
+                    }
+            }, 5);
+            this.setState({showStore1: false})
+        } else {
+            return false
+        }
+    }
+    cardInputNumber = () => {
+        if(!this.state.showStore1) {
+            let rotateY = 180;
             let inter = setInterval(() => {
                 this.myRef_5.current.style.transform = 'perspective(1000px) rotateY('+ rotateY +'deg) rotateX(0deg) rotateZ(0deg)';
-                rotateY++;
+                rotateY--;
                 if(rotateY === 90) {
-                    this.setState({showStore: true})
+                    this.setState({showStore: false})
                 }
-                else if(rotateY === 180) {
+                else if(rotateY === 0) {
                     clearInterval(inter);
                 }
             }, 5);
+            this.setState({showStore1: true})
+        } else {
+            return false
         }
-    }
-    handlerCvv = () => {
-        this.setState({showStore1: true})
     }
     render() {
         const { cardMonth, cardYear, 
@@ -175,16 +193,17 @@ export default class extends React.PureComponent  {
                     <div className="cart-input_number">
                         <label htmlFor="cardNumber" className="cart-label_number">Card Number</label>
                         <input type="text" id="cardNumber" className="cardNumber" onChange={this.handlerInputNumber}
-                        value={cardNumber}/>
+                        value={cardNumber} onClick={this.cardInputNumber}/>
                     </div>
                     <div className="cart-input_holders">
                         <label htmlFor="cardName" className="cart-label_holders">Card Holders</label>
-                        <input type="text" id="cardName" value={cardName} className="cardHolders" onChange={this.handlerInputName}/>
+                        <input type="text" id="cardName" value={cardName} className="cardHolders" 
+                        onChange={this.handlerInputName} onClick={this.cardInputNumber}/>
                     </div>
                     <div className="card-form__row">
                         <div className="card-form__group">
                             <label htmlFor="cardMonth" className="cart-label_month">Expiration Date</label>
-                            <select id="cardMonth" className="cardMonth" onChange={this.handlerSelectMonth}>
+                            <select id="cardMonth" className="cardMonth" onChange={this.handlerSelectMonth} onClick={this.cardInputNumber}>
                                 <option disabled="disabled" selected>Month</option>
                                 {
                                     cardMonth.map((item) => {
@@ -195,7 +214,7 @@ export default class extends React.PureComponent  {
                                     }) 
                                 }
                             </select>
-                            <select id="cardYear" className="cardYear" onChange={this.handlerSelectYear}>
+                            <select id="cardYear" className="cardYear" onChange={this.handlerSelectYear} onClick={this.cardInputNumber}>
                                 <option disabled="disabled" selected>Year</option>
                                 {
                                     cardYear.map((item) => {

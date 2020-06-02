@@ -148,11 +148,11 @@ export default class extends React.PureComponent  {
                 showStore } = this.state;
         return (
             <div className="card-from">
-                <div className="card-item" ref={this.myRef_5}>
+                <div className="card-item" ref={this.myRef_5}  onClick={this.hanlderHide}>
                     <div className="card-item__side">
                         <div className="card-item__logo">
-                            <img src={chip} style={{width: '60px', height: '48px'}}/>
-                            <img src={visa} style={{width: '85px', height: '45px'}}/>
+                            <img src={chip} className="card-item_img_1" />
+                            <img src={visa} className="card-item_img_2" />
                         </div>
                         <label htmlFor="cardNumber" className="card-item__numbers">
                             <div className="card-item__number" ref={this.myRef} onClick={this.cardNumberItem}>

@@ -205,9 +205,6 @@ body {
 .card-item__date {
     padding: 5px;
 }
-/* .front {
-    transform: perspective(1000px) rotateY(180deg) rotateX(0deg) rotateZ(0deg);
-} */
 .back {
     transform: perspective(1000px) rotateY(0) rotateX(0deg) rotateZ(0deg);
     position: absolute;
@@ -270,4 +267,91 @@ body {
     object-fit: contain;
     max-height: 100%;
     object-position: top right;
+}
+.card-item_img_1 {
+    width: 60px;
+    height: 48px;
+}
+.card-item_img_2 {
+    width: 85px;
+    height: 45px;
+}
+@media screen and (max-width: 569px) {
+    .card-input_cvv {
+        width: 100%;
+        padding-top: 38px;
+        padding-right: 0;
+    }
+    .cardYear {
+        width: 45%;
+        margin-right: 0;
+    }
+    .cardMonth {
+        width: 45%;
+    }
+}
+@media screen and (max-width: 480px) {
+    .card-item {
+        max-width: 350px;
+        max-height: 180px;
+        height: 180px;
+    }
+    .card-item__logo {
+        margin-bottom: 15px;
+    }
+    .card-item_img_1 {
+        width: 40px;
+        height: 34px;
+    }
+    .card-item_img_2 {
+        width: 60px;
+        height: 35px;
+    }
+    .card-item__numbers {
+        margin-bottom: 15px;
+    }
+    .card-item__side {
+        padding: 15px 10px;
+    }
+}
+@media screen and (max-width: 360px) {
+    .card-item {
+        max-width: 300px;
+        max-height: 130px;
+    }
+    .card-item_img_1 {
+        width: 35px;
+        height: 30px;
+    }
+    .card-item_img_2 {
+        width: 55px;
+        height: 30px;
+    }
+    .card-item__side {
+        padding: 15px 10px;
+    }
+    .card-item__numbers {
+        margin-bottom: 5px;
+    }
+    .card-item__numberItem {
+        font-size: 20px;
+        width: 16px;
+        color: #fff;
+        margin: auto;
+    }
+    .card-item__holder {
+        opacity: 0.7;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+    .card-item__name {
+        font-size: 15px;
+    }
+    .card-item__dateTitle {
+        font-size: 12px;
+    }
+    .card-item__dateItem span {
+        font-size: 15px;
+        width: 22px;
+    }
 }

@@ -3,7 +3,7 @@ import chip from './img/chip.png';
 import visa from './img/visa.png';
 import './card-form.css';
 
-export default class extends React.Component {
+export default class extends React.PureComponent  {
     constructor(props){
         super(props)
         this.state = {
@@ -14,12 +14,17 @@ export default class extends React.Component {
             cardName: '',
             cardNumber: '',
             cardNumber1: [],
-            visible: true
+            visible: true,
+            cardCvv: '',
+            showStore: false,
+            showStore1: false
         }
         this.myRef = React.createRef();
         this.myRef_1 = React.createRef();
         this.myRef_2 = React.createRef();
         this.myRef_3 = React.createRef();
+        this.myRef_4 = React.createRef();
+        this.myRef_5 = React.createRef();
     }
     componentDidMount() {
         function arr(key, key_1) {
@@ -79,12 +84,41 @@ export default class extends React.Component {
             this.myRef.current.classList.remove('active');
         }
     }
+    handlerCardCvv = (event) => {
+        let valueCvv = event.target.value;
+        if(Number(valueCvv) && valueCvv.length <= 3) {
+            this.setState({cardCvv: valueCvv})
+        } else if(valueCvv.length <= 1) {
+            this.setState({cardCvv: ''})
+        }
+    }
+    componentWillUpdate(nextProps, nextState){
+        if(this.state.showStore1 !== nextState.showStore1) {
+            let rotateY = 0;
+            let inter = setInterval(() => {
+                this.myRef_5.current.style.transform = 'perspective(1000px) rotateY('+ rotateY +'deg) rotateX(0deg) rotateZ(0deg)';
+                rotateY++;
+                if(rotateY === 90) {
+                    this.setState({showStore: true})
+                }
+                else if(rotateY === 180) {
+                    clearInterval(inter);
+                }
+            }, 5);
+        }
+    }
+    handlerCvv = () => {
+        this.setState({showStore1: true})
+    }
     render() {
-        const { cardMonth, cardYear, cardMonthValue, cardYearValue, cardName, cardNumber, cardNumber1 } = this.state;
-        
+        const { cardMonth, cardYear, 
+                cardMonthValue, cardYearValue, 
+                cardName, cardNumber, 
+                cardNumber1, cardCvv,
+                showStore, showStore1 } = this.state;
         return (
             <div className="card-from">
-                <div className="card-item">
+                <div className="card-item" ref={this.myRef_5}>
                     <div className="card-item__side">
                         <div className="card-item__logo">
                             <img src={chip} style={{width: '60px', height: '48px'}}/>
@@ -125,6 +159,16 @@ export default class extends React.Component {
                                 </div>
                             </div>
                         </div>
+                    <div style={{display: showStore ? 'block' : 'none' }} className="card-item__side_1 back">
+                        <div className="card-item__band"></div>
+                        <div className="card-item__cvv">
+                            <div className="card-item__cvvTitle">CVV</div>
+                            <div className="card-item__cvvBand">{cardCvv}</div>
+                            <div className="card-item__type">
+                                <img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/visa.png" className="card-item__typeImg"/>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <form className="card-form__inner">
@@ -165,7 +209,10 @@ export default class extends React.Component {
                         
                             <div className="card-input_cvv">
                                 <label htmlFor="cardCvv" className="card-label__cvv">CVV</label>
-                                <input type="text" className="card-cod__cvv" id="cardCvv" />
+                                <input type="text" className="card-cod__cvv" 
+                                        id="cardCvv" value={cardCvv} 
+                                        onChange={this.handlerCardCvv}
+                                        onClick={this.handlerCvv}/>
                             </div>
                         </div>
                     </div>

@@ -47,41 +47,26 @@ export default class extends React.PureComponent  {
     handlerSelectMonth = (event) => {
         let valueMonth = event.target.value;
         this.setState({ cardMonthValue: valueMonth })
-        this.myRef_2.current.classList.add('active');
-        this.myRef.current.classList.remove('active');
-        this.myRef_1.current.classList.remove('active');
     }
     handlerSelectYear = (event) => {
         let valueMonth = event.target.value;
         let year = valueMonth.split('').splice(-2, 2).join('');
         this.setState({ cardYearValue: year })
-        this.myRef_2.current.classList.add('active');
-        this.myRef.current.classList.remove('active');
-        this.myRef_1.current.classList.remove('active');
     }
     handlerInputName = (event) => {
         let valueName = event.target.value;
-        this.myRef.current.classList.remove('active');
-        this.myRef_2.current.classList.remove('active');
         if(valueName === '') {
-            this.myRef_1.current.classList.remove('active');
             this.setState({ cardName: '' })
         } else {
-            this.myRef_1.current.classList.add('active');
             this.setState({ cardName: valueName })
         }
     }
     handlerInputNumber = (event) => {
         let valueNumber = event.target.value;
-        this.myRef_1.current.classList.remove('active');
-        this.myRef_2.current.classList.remove('active');
         if(Number(valueNumber) && valueNumber.length <= 16) {
-            console.log(valueNumber.length)
             this.setState({cardNumber: valueNumber})
-            this.myRef.current.classList.add('active');
         } else if(valueNumber.length <= 1) {
             this.setState({cardNumber: ''})
-            this.myRef.current.classList.remove('active');
         }
     }
     handlerCardCvv = (event) => {
@@ -128,6 +113,21 @@ export default class extends React.PureComponent  {
             return false
         }
     }
+    cardNumberItem = () => {
+        this.myRef.current.classList.add('active');
+        this.myRef_1.current.classList.remove('active');
+        this.myRef_2.current.classList.remove('active');
+    }
+    cardHolderItem = () => {
+        this.myRef_1.current.classList.add('active');
+        this.myRef.current.classList.remove('active');
+        this.myRef_2.current.classList.remove('active');
+    }
+    cardExpiresItem = () => {
+        this.myRef_2.current.classList.add('active');
+        this.myRef_1.current.classList.remove('active');
+        this.myRef.current.classList.remove('active');
+    }
     render() {
         const { cardMonth, cardYear, 
                 cardMonthValue, cardYearValue, 
@@ -143,7 +143,7 @@ export default class extends React.PureComponent  {
                             <img src={visa} style={{width: '85px', height: '45px'}}/>
                         </div>
                         <label htmlFor="cardNumber" className="card-item__numbers">
-                            <div className="card-item__number" ref={this.myRef}>
+                            <div className="card-item__number" ref={this.myRef} onClick={this.cardNumberItem}>
                                 {   cardNumber === '' ?
                                         cardNumber1.map((item, i) => {
                                             return(
@@ -160,11 +160,11 @@ export default class extends React.PureComponent  {
                             </div>
                         </label>
                         <div className="card-item__content">
-                            <label htmlFor="cardName" className="card-item__info" ref={this.myRef_1}>
+                            <label htmlFor="cardName" className="card-item__info" ref={this.myRef_1} onClick={this.cardHolderItem}>
                                 <div className="card-item__holder">Card Holder</div>
                                 <div className="card-item__name">{cardName.trim() === '' ? 'Full Name' : cardName}</div>
                             </label>
-                            <div className="card-item__date" ref={this.myRef_2}>
+                            <div className="card-item__date" ref={this.myRef_2} onClick={this.cardExpiresItem}>
                                 <label htmlFor="cardMonth" className="card-item__dateTitle">Expires</label>
                                 <div className="cardMonth_group">
                                     <label htmlFor="cardMonth" className="card-item__dateItem">
@@ -193,17 +193,18 @@ export default class extends React.PureComponent  {
                     <div className="cart-input_number">
                         <label htmlFor="cardNumber" className="cart-label_number">Card Number</label>
                         <input type="text" id="cardNumber" className="cardNumber" onChange={this.handlerInputNumber}
-                        value={cardNumber} onClick={this.cardInputNumber}/>
+                        value={cardNumber} onClick={this.cardInputNumber} onClick={this.cardNumberItem}/>
                     </div>
                     <div className="cart-input_holders">
                         <label htmlFor="cardName" className="cart-label_holders">Card Holders</label>
                         <input type="text" id="cardName" value={cardName} className="cardHolders" 
-                        onChange={this.handlerInputName} onClick={this.cardInputNumber}/>
+                        onChange={this.handlerInputName} onClick={this.cardInputNumber} onClick={this.cardHolderItem}/>
                     </div>
                     <div className="card-form__row">
                         <div className="card-form__group">
                             <label htmlFor="cardMonth" className="cart-label_month">Expiration Date</label>
-                            <select id="cardMonth" className="cardMonth" onChange={this.handlerSelectMonth} onClick={this.cardInputNumber}>
+                            <select id="cardMonth" className="cardMonth" onChange={this.handlerSelectMonth} 
+                            onClick={this.cardInputNumber} onClick={this.cardExpiresItem}>
                                 <option disabled="disabled" selected>Month</option>
                                 {
                                     cardMonth.map((item) => {
@@ -214,7 +215,8 @@ export default class extends React.PureComponent  {
                                     }) 
                                 }
                             </select>
-                            <select id="cardYear" className="cardYear" onChange={this.handlerSelectYear} onClick={this.cardInputNumber}>
+                            <select id="cardYear" className="cardYear" onChange={this.handlerSelectYear} 
+                            onClick={this.cardInputNumber} onClick={this.cardExpiresItem}>
                                 <option disabled="disabled" selected>Year</option>
                                 {
                                     cardYear.map((item) => {

@@ -155,7 +155,7 @@ export default class extends React.PureComponent  {
                             <img src={visa} className="card-item_img_2" />
                         </div>
                         <label htmlFor="cardNumber" className="card-item__numbers">
-                            <div className="card-item__number" ref={this.myRef} onClick={this.cardNumberItem}>
+                            <div className="card-item__number" ref={this.myRef}>
                                 {   cardNumber === '' ?
                                         cardNumber1.map((item, i) => {
                                             return(
@@ -205,12 +205,13 @@ export default class extends React.PureComponent  {
                     <div className="cart-input_number">
                         <label htmlFor="cardNumber" className="cart-label_number">Card Number</label>
                         <input type="text" id="cardNumber" className="cardNumber" onChange={this.handlerInputNumber}
-                        value={cardNumber} onClick={this.cardInputNumber} onClick={this.cardNumberItem}/>
+                        value={cardNumber} onClick={this.cardInputNumber}/>
                     </div>
                     <div className="cart-input_holders">
                         <label htmlFor="cardName" className="cart-label_holders">Card Holders</label>
                         <input type="text" id="cardName" value={cardName} className="cardHolders" 
-                        onChange={this.handlerInputName}/>
+                        onChange={this.handlerInputName}
+                        onClick={this.cardInputNumber}/>
                     </div>
                     <div className="card-form__row">
                         <div className="card-form__group">

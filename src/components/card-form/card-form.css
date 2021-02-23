@@ -276,6 +276,9 @@ body {
     width: 85px;
     height: 45px;
 }
+input {
+    outline: none;
+}
 @media screen and (max-width: 569px) {
     .card-input_cvv {
         width: 100%;
